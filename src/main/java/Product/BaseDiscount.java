@@ -1,8 +1,11 @@
 package Product;
 
+
 public abstract class BaseDiscount implements Discount {
     protected abstract boolean isApplicable(Product product);
+
     protected abstract double calculateDiscount(Product product);
+
     protected Discount nextDiscount;
 
     public BaseDiscount(Discount nextDiscount) {
@@ -22,7 +25,7 @@ public abstract class BaseDiscount implements Discount {
     public String getDescription(Product product) {
         if (isApplicable(product)) {
             return "Rabatten är på: " + calculateDiscount(product) + " kr";
-        }  else if (nextDiscount != null) {
+        } else if (nextDiscount != null) {
             return nextDiscount.getDescription(product);
         }
         return "Ingen rabatt finns tillgänglig";

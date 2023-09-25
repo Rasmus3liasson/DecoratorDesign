@@ -1,5 +1,9 @@
 
 import Discounts.FridayDiscount;
+
+import Discounts.GeneralDiscounts.Applicability;
+import Discounts.GeneralDiscounts.DiscountCalculator;
+import Discounts.GeneralDiscounts.GeneralDiscount;
 import Discounts.MilkDiscount;
 import Discounts.QuantityDiscount;
 import Product.Product;
@@ -7,7 +11,6 @@ import Product.Discount;
 
 import java.util.ArrayList;
 import java.util.List;
-
 public class App {
     public static void main(String[] args) {
 
@@ -29,7 +32,36 @@ public class App {
 
             System.out.println("Produkt: " + product.name());
             System.out.println("Pris: " + product.price());
-      System.out.println("Pris Rabatt " + discountedPrice);
+            System.out.println("Pris Rabatt " + discountedPrice);
+            System.out.println("Beskrivning: " + quantityDiscount.getDescription(product));
+            System.out.println("----------------------------");
+        }
+
+        // VG assignment
+        // Test for discount of 20 % and price is over 20
+        Applicability applicability = p -> p.price() >= 20;
+        DiscountCalculator percentageLogic = p -> {
+            if (p.price() >= 20) {
+                return p.price() * 0.20;
+            }
+            return 0.0;
+        };
+
+        GeneralDiscount testCase = new GeneralDiscount(applicability, percentageLogic, null);
+
+
+        // Create a list of products to apply the GeneralDiscount
+        List<Product> discountList = new ArrayList<>();
+        discountList.add(new Product("Produkt1", 25.0, 1));
+        discountList.add(new Product("Produkt2", 30.0, 5));
+        discountList.add(new Product("Produkt3", 15.0, 5));
+
+        // Apply the GeneralDiscount to products in discountList
+        for (Product product : discountList) {
+            double discountedPrice = testCase.apply(product);
+            System.out.println("Produkt: " + product.name());
+            System.out.println("Pris: " + product.price());
+            System.out.println("Pris Rabatt " + discountedPrice);
             System.out.println("Beskrivning: " + quantityDiscount.getDescription(product));
             System.out.println("----------------------------");
         }
