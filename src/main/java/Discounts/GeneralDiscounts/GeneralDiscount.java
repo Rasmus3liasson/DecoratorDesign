@@ -8,9 +8,9 @@ import Product.Product;
 
 public class GeneralDiscount extends BaseDiscount {
     private final Applicability applicability;
-    private final DiscountCalculator percentage;
+    private final DiscountLogic percentage;
 
-    public GeneralDiscount(Applicability applicability, DiscountCalculator percentage, Discount nextDiscount) {
+    public GeneralDiscount(Applicability applicability, DiscountLogic percentage, Discount nextDiscount) {
         super(nextDiscount);
         this.applicability = applicability;
         this.percentage = percentage;

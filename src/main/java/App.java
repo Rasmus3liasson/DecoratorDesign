@@ -2,7 +2,7 @@
 import Discounts.FridayDiscount;
 
 import Discounts.GeneralDiscounts.Applicability;
-import Discounts.GeneralDiscounts.DiscountCalculator;
+import Discounts.GeneralDiscounts.DiscountLogic;
 import Discounts.GeneralDiscounts.GeneralDiscount;
 import Discounts.MilkDiscount;
 import Discounts.QuantityDiscount;
@@ -11,6 +11,7 @@ import Product.Discount;
 
 import java.util.ArrayList;
 import java.util.List;
+
 public class App {
     public static void main(String[] args) {
 
@@ -25,6 +26,7 @@ public class App {
         Discount fridayDiscount = new FridayDiscount(milkDiscount);
         Discount quantityDiscount = new QuantityDiscount(fridayDiscount);
 
+
         // Apply discount to products
         for (Product product : productList) {
             double discountedPrice = quantityDiscount.apply(product);
@@ -38,14 +40,23 @@ public class App {
         }
 
         // VG assignment
-        // Test for discount of 20 % and price is over 20
-        Applicability applicability = p -> p.price() >= 20;
-        DiscountCalculator percentageLogic = p -> {
-            if (p.price() >= 20) {
-                return p.price() * 0.20;
+        // Test for discount of 20 % and price is over 20 with an example class
+        class GeneralDiscountExample {
+            public static boolean isApplicable(Product product) {
+                return product.price() >= 20;
             }
-            return 0.0;
-        };
+
+            public static double calculateDiscount(Product product) {
+                if (product.price() >= 20) {
+                    return product.price() * 0.20;
+                }
+                return 0.0;
+            }
+        }
+
+        Applicability applicability = GeneralDiscountExample::isApplicable;
+        DiscountLogic percentageLogic = GeneralDiscountExample::calculateDiscount;
+
 
         GeneralDiscount testCase = new GeneralDiscount(applicability, percentageLogic, null);
 

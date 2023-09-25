@@ -2,6 +2,6 @@ package Discounts.GeneralDiscounts;
 
 import Product.Product;
 
-public interface DiscountCalculator {
+public interface DiscountLogic {
     double calculateDiscount(Product product);
 }
