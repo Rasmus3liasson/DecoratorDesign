@@ -13,7 +13,7 @@ public class MilkDiscount extends BaseDiscount {
 
     @Override
     protected boolean isApplicable(Product product) {
-        if (product.name().toLowerCase().equals("milk")) {
+        if (product.name().toLowerCase().trim().equals("milk")) {
             return true;
         }
         return false;
