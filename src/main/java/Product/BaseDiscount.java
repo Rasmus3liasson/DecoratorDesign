@@ -1,11 +1,8 @@
 package Product;
 
-
-import java.util.ArrayList;
-import java.util.List;
-
 public abstract class BaseDiscount implements Discount {
     protected abstract boolean isApplicable(Product product);
+
     protected abstract double calculateDiscount(Product product);
 
     protected Discount nextDiscount;
