@@ -35,7 +35,7 @@ public class App {
             System.out.println("Produkt: " + product.name());
             System.out.println("Pris: " + product.price());
             System.out.println("Pris Rabatt " + discountedPrice);
-            System.out.println("Beskrivning: " + quantityDiscount.getDescription(product));
+            System.out.println("Applicerade rabatter: " + quantityDiscount.getDescription(product));
             System.out.println("----------------------------");
         }
 

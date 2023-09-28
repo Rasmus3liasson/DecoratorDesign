@@ -1,5 +1,8 @@
 package Product;
 
+import java.util.ArrayList;
+import java.util.List;
+
 public abstract class BaseDiscount implements Discount {
     protected abstract boolean isApplicable(Product product);
 
@@ -22,14 +25,23 @@ public abstract class BaseDiscount implements Discount {
 
     @Override
     public String getDescription(Product product) {
-        double totalDiscount = apply(product);
+        List<String> appliedDiscounts = new ArrayList<>();
+
         if (isApplicable(product)) {
-            return "Rabatten är på: " + totalDiscount;
-        } else if (nextDiscount != null) {
-            return nextDiscount.getDescription(product);
+            appliedDiscounts.add(this.getClass().getSimpleName());
         }
-        return "Ingen rabatt finns tillgänglig";
+
+        if (nextDiscount != null) {
+            appliedDiscounts.add(nextDiscount.getDescription(product));
+        }
+
+        if (!appliedDiscounts.isEmpty()) {
+            return String.join(", ", appliedDiscounts);
+        }
+        return "Ingen rabatt applicerades";
     }
+
+
 
 
 }
