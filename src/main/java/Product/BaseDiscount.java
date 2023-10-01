@@ -35,13 +35,7 @@ public abstract class BaseDiscount implements Discount {
             appliedDiscounts.add(nextDiscount.getDescription(product));
         }
 
-        if (!appliedDiscounts.isEmpty()) {
-            return String.join(", ", appliedDiscounts);
-        }
-        return "Ingen rabatt applicerades";
+        return !appliedDiscounts.isEmpty() ? String.join(", ", appliedDiscounts) : "Ingen rabatt applicerades";
+
     }
-
-
-
-
 }
